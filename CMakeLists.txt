@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.3)
-project(ZaeimC0_Server)
+project(ZaeimCo_Server)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -10,7 +10,7 @@ link_directories(${Boost_LIBRARY_DIR})
 find_package (Threads)
 
 set(SOURCE_FILES main.cpp)
-add_executable(ZaeimC0_Server ${SOURCE_FILES})
+add_executable(ZaeimCo_Server ${SOURCE_FILES})
 
-target_link_libraries( ZaeimC0_Server ${Boost_LIBRARIES} )
-target_link_libraries (ZaeimC0_Server ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries( ZaeimCo_Server ${Boost_LIBRARIES} )
+target_link_libraries (ZaeimCo_Server ${CMAKE_THREAD_LIBS_INIT})
