@@ -1,11 +1,9 @@
 #include "Utils.h"
 #include "UDPServer.h"
 
-#include <iostream>
-
 int main(int argc, char* argv[])
 {
-    int port;
+    unsigned short port;
     if(argc != 2)
     {
         return print_usage();

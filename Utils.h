@@ -5,10 +5,8 @@
 #ifndef ZAEIMCO_SERVER_UTILS_H
 #define ZAEIMCO_SERVER_UTILS_H
 
-#include <ctime>
-#include <string>
+#include <iostream>
 
-std::string make_daytime_string();
 int print_usage();
 
 #endif //ZAEIMCO_SERVER_UTILS_H
