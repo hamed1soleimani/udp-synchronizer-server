@@ -4,8 +4,8 @@
 
 #include "UDPServer.h"
 
-UDPServer::UDPServer(boost::asio::io_service& io_service)
-        : socket_(io_service, udp::endpoint(udp::v4(), 8000))
+UDPServer::UDPServer(boost::asio::io_service& io_service, int port)
+        : socket_(io_service, udp::endpoint(udp::v4(), port))
 {
     start_receive();
 }

@@ -17,7 +17,7 @@ using boost::asio::ip::udp;
 class UDPServer
 {
 public:
-    UDPServer(boost::asio::io_service& io_service);
+    UDPServer(boost::asio::io_service& io_service, int port);
 
 private:
 

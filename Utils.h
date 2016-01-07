@@ -9,5 +9,6 @@
 #include <string>
 
 std::string make_daytime_string();
+int print_usage();
 
 #endif //ZAEIMCO_SERVER_UTILS_H
