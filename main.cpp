@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "UDPServer.h"
+#include "Consumer.h"
 
 int main(int argc, char* argv[])
 {
@@ -17,8 +18,11 @@ int main(int argc, char* argv[])
 
     try
     {
+        std::shared_ptr<std::queue<Message>> queue = std::make_shared<std::queue<Message>>();
+        std::shared_ptr<std::mutex> mutex = std::make_shared<std::mutex>();
+        Consumer consumer(queue, mutex);
         boost::asio::io_service io_service;
-        UDPServer server(io_service, port);
+        UDPServer server(io_service, port, queue, mutex);
         io_service.run();
     }
     catch (std::exception& e)

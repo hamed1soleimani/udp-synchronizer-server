@@ -6,6 +6,8 @@
 #define ZAEIMCO_SERVER_UTILS_H
 
 #include <iostream>
+#include <mutex>
+
 namespace utils{
     int print_usage();
 }
