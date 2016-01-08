@@ -24,5 +24,12 @@ void Consumer::start() {
 }
 
 void Consumer::consume(Message message) {
-    std::cout << "consumed" << std::endl;
+    if(message.operation.compare("CREATE_DIR") == 0)
+        utils::create_dir(message.filename);
+    else if(message.operation.compare("REMOVE_DIR") == 0)
+        utils::remove_dir(message.filename);
+    else if(message.operation.compare("REMOVE_FILE") == 0)
+        utils::remove_file(message.filename);
+    else if(message.operation.compare("CREATE_FILE") == 0)
+        std::cerr << "dose not implemented yet!" << std::endl;
 }
