@@ -4,7 +4,7 @@
 
 #include "Utils.h"
 
-int print_usage(){
+int utils::print_usage(){
     std::cerr << "Usage: client <port number>" << std::endl;
     return 1;
 }

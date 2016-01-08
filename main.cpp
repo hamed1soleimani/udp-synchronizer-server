@@ -6,13 +6,13 @@ int main(int argc, char* argv[])
     unsigned short port;
     if(argc != 2)
     {
-        return print_usage();
+        return utils::print_usage();
     }
 
     std::istringstream iss( argv[1] );
     if (!(iss >> port))
     {
-        return print_usage();
+        return utils::print_usage();
     }
 
     try

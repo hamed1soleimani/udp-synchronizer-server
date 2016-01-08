@@ -6,7 +6,8 @@
 #define ZAEIMCO_SERVER_UTILS_H
 
 #include <iostream>
-
-int print_usage();
+namespace utils{
+    int print_usage();
+}
 
 #endif //ZAEIMCO_SERVER_UTILS_H
