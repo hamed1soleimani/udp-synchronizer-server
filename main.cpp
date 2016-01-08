@@ -20,9 +20,10 @@ int main(int argc, char* argv[])
     {
         std::shared_ptr<std::queue<Message>> queue = std::make_shared<std::queue<Message>>();
         std::shared_ptr<std::mutex> mutex = std::make_shared<std::mutex>();
-        Consumer consumer(queue, mutex);
+        std::shared_ptr<std::condition_variable> condition = std::make_shared<std::condition_variable>();
+        Consumer consumer(queue, mutex, condition);
         boost::asio::io_service io_service;
-        UDPServer server(io_service, port, queue, mutex);
+        UDPServer server(io_service, port, queue, mutex, condition);
         io_service.run();
     }
     catch (std::exception& e)

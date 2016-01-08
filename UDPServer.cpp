@@ -8,8 +8,9 @@
 
 UDPServer::UDPServer(boost::asio::io_service& io_service, unsigned short port,
                      std::shared_ptr<std::queue<Message>> queue,
-                     std::shared_ptr<std::mutex> mutex)
-        : socket_{io_service, udp::endpoint(udp::v4(), port)}, queue_{queue}, mutex_{mutex}
+                     std::shared_ptr<std::mutex> mutex,
+                     std::shared_ptr<std::condition_variable> condition)
+        : socket_{io_service, udp::endpoint(udp::v4(), port)}, queue_{queue}, mutex_{mutex}, condition_{condition}
 {
     //std::thread t1{&UDPServer::start_receive, this};
     start_receive();
@@ -33,6 +34,7 @@ void UDPServer::handle_receive(const boost::system::error_code& error,
         std::unique_lock<std::mutex>lck{*mutex_};
         queue_->push(Message::toMessage(message));
         lck.unlock();
+        condition_->notify_all();
         std::cout << message << std::endl;
         start_receive();
     }

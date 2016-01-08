@@ -5,8 +5,9 @@
 #include "Consumer.h"
 #include "utils.h"
 
-Consumer::Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex) :
-        queue_{queue}, mutex_{mutex} {
+Consumer::Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
+                   std::shared_ptr<std::condition_variable> condition) :
+        queue_{queue}, mutex_{mutex}, condition_{condition} {
     std::thread t1{&Consumer::start, this};
     t1.detach();
 }
@@ -14,12 +15,11 @@ Consumer::Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<s
 void Consumer::start() {
     while (true) {
         std::unique_lock<std::mutex> lck{*mutex_};
-        if(queue_->size() > 0) {
-            Message message = queue_->front();
-            queue_->pop();
-            lck.unlock();
-            consume(message);
-        }
+        while(queue_->size() == 0) condition_->wait(lck);
+        Message message = queue_->front();
+        queue_->pop();
+        lck.unlock();
+        consume(message);
     }
 }
 

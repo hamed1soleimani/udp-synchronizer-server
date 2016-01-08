@@ -11,17 +11,20 @@
 #include <iostream>
 #include <thread>
 #include <tuple>
+#include <condition_variable>
 
 #include "Message.h"
 
 class Consumer {
 public:
-    Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex);
+    Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
+            std::shared_ptr<std::condition_variable> condition);
     void start();
     void consume(Message message);
 private:
     std::shared_ptr<std::queue<Message>> queue_;
     std::shared_ptr<std::mutex> mutex_;
+    std::shared_ptr<std::condition_variable> condition_;
 };
 
 #endif //ZAEIMCO_SERVER_CONSUMER_H
