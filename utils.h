@@ -6,10 +6,12 @@
 #define ZAEIMCO_SERVER_UTILS_H
 
 #include <iostream>
-#include <mutex>
 
 namespace utils{
     int print_usage();
+    bool remove_dir(std::string dir);
+    bool remove_file(std::string file);
+    bool create_dir(std::string fir);
 }
 
 #endif //ZAEIMCO_SERVER_UTILS_H
