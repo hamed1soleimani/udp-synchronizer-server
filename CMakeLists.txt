@@ -9,7 +9,7 @@ link_directories(${Boost_LIBRARY_DIR})
 
 find_package (Threads)
 
-set(SOURCE_FILES main.cpp UDPServer.cpp UDPServer.h Utils.cpp Utils.h)
+set(SOURCE_FILES main.cpp UDPServer.cpp UDPServer.h utils.cpp utils.h)
 add_executable(ZaeimCo_Server ${SOURCE_FILES})
 
 target_link_libraries( ZaeimCo_Server ${Boost_LIBRARIES} )
