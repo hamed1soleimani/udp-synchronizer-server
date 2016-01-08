@@ -35,7 +35,7 @@ void UDPServer::handle_receive(const boost::system::error_code& error,
         queue_->push(Message::toMessage(message));
         lck.unlock();
         condition_->notify_all();
-        std::cout << message << std::endl;
+        //std::cout << message << std::endl;
         start_receive();
     }
 }
