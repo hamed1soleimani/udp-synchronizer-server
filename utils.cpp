@@ -9,7 +9,7 @@
 using namespace boost::filesystem;
 
 int utils::print_usage() {
-    std::cerr << "Usage: client <port number>" << std::endl;
+    std::cerr << "Usage: server <port number>" << std::endl;
     return 1;
 }
 
