@@ -18,9 +18,12 @@
 class Consumer {
 public:
     Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
-            std::shared_ptr<std::condition_variable> condition);
+             std::shared_ptr<std::condition_variable> condition);
+
     void start();
+
     void consume(Message message);
+
 private:
     std::shared_ptr<std::queue<Message>> queue_;
     std::shared_ptr<std::mutex> mutex_;

@@ -19,13 +19,13 @@
 
 using boost::asio::ip::udp;
 
-class UDPServer
-{
+class UDPServer {
 public:
-    UDPServer(boost::asio::io_service& io_service, unsigned short port,
+    UDPServer(boost::asio::io_service &io_service, unsigned short port,
               std::shared_ptr<std::queue<Message>> queue,
               std::shared_ptr<std::mutex> mutex,
               std::shared_ptr<std::condition_variable> condition);
+
 private:
     udp::socket socket_;
     udp::endpoint remote_endpoint_;
@@ -33,8 +33,10 @@ private:
     std::shared_ptr<std::queue<Message>> queue_;
     std::shared_ptr<std::mutex> mutex_;
     std::shared_ptr<std::condition_variable> condition_;
+
     void start_receive();
-    void handle_receive(const boost::system::error_code& error,
+
+    void handle_receive(const boost::system::error_code &error,
                         std::size_t size);
 };
 

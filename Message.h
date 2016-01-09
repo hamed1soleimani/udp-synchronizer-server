@@ -7,11 +7,13 @@
 
 #include <string>
 
-class Message{
+class Message {
 public:
     Message(std::string operation, std::string filename);
+
     std::string operation;
     std::string filename;
+
     static Message toMessage(std::string message);
 };
 

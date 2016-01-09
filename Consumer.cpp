@@ -15,7 +15,7 @@ Consumer::Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<s
 void Consumer::start() {
     while (true) {
         std::unique_lock<std::mutex> lck{*mutex_};
-        while(queue_->size() == 0) condition_->wait(lck);
+        while (queue_->size() == 0) condition_->wait(lck);
         Message message = queue_->front();
         queue_->pop();
         lck.unlock();
@@ -24,12 +24,12 @@ void Consumer::start() {
 }
 
 void Consumer::consume(Message message) {
-    if(message.operation.compare("CREATE_DIR") == 0)
+    if (message.operation.compare("CREATE_DIR") == 0)
         utils::create_dir(message.filename);
-    else if(message.operation.compare("REMOVE_DIR") == 0)
+    else if (message.operation.compare("REMOVE_DIR") == 0)
         utils::remove_dir(message.filename);
-    else if(message.operation.compare("REMOVE_FILE") == 0)
+    else if (message.operation.compare("REMOVE_FILE") == 0)
         utils::remove_file(message.filename);
-    else if(message.operation.compare("CREATE_FILE") == 0)
+    else if (message.operation.compare("CREATE_FILE") == 0)
         std::cerr << "dose not implemented yet!" << std::endl;
 }
