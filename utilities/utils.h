@@ -19,6 +19,8 @@ namespace utils {
     bool create_file(std::string file);
 
     std::string hash_message(std::string message);
+
+    void write_chunk(std::string filename, unsigned long pos, int size, char * content);
 }
 
 #endif //ZAEIMCO_SERVER_UTILS_H

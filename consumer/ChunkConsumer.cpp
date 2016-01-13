@@ -3,9 +3,13 @@
 //
 
 #include "ChunkConsumer.h"
+#include "../utilities/utils.h"
 
+#include <boost/filesystem.hpp>
 #include <thread>
 #include <iostream>
+
+using namespace boost::filesystem;
 
 ChunkConsumer::ChunkConsumer(std::shared_ptr<std::queue<Chunk>> queue, std::shared_ptr<std::mutex> mutex,
                              std::shared_ptr<std::condition_variable> condition) :
@@ -26,5 +30,10 @@ void ChunkConsumer::start() {
 }
 
 void ChunkConsumer::consume(Chunk chunk) {
-    std::cout << "chunk consumed" << std::endl;
+    path p{chunk.filename};
+    if(!exists(p)){
+        utils::create_file(chunk.filename);
+    }
+    utils::write_chunk(chunk.filename, chunk.start, sizeof(chunk.contents), chunk.contents.data());
+    std::cout << "created chunk at " << chunk.filename << " [" << chunk.start << "]" << std::endl;
 }

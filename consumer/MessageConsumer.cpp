@@ -30,8 +30,6 @@ void MessageConsumer::consume(Message message) {
         utils::remove_dir(message.filename);
     else if (message.operation.compare("REMOVE_FILE") == 0)
         utils::remove_file(message.filename);
-    else if (message.operation.compare("CREATE_FILE") == 0)
-        utils::create_file(message.filename);
     else
         std::cout << "Invalid operation: " << message.operation << std::endl;
 }

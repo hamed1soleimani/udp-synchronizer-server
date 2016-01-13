@@ -50,11 +50,9 @@ void UDPServer::handle_receive(const boost::system::error_code &error,
                 chunk_condition_->notify_all();
             } else {
                 std::cout << "corrupted message!" << std::endl;
-                std::cout << " 321 hash is :" << hash << std::endl;
             }
         } else {
             std::cout << "corrupted message!" << std::endl;
-            std::cout << " 123 hash is :" << hash << std::endl;
         }
         start_receive();
     }

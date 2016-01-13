@@ -103,3 +103,20 @@ std::string utils::hash_message(std::string message) {
         return h;
     }
 }
+
+void utils::write_chunk(std::string filename, unsigned long pos, int size, char *content) {
+    std::streampos file_size;
+    std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::ate);
+    file_size = file.tellp();
+    if(file_size >= pos + size){
+        file.seekp(pos, std::ios::beg);
+        file.write(content, size);
+    }else{
+        unsigned long dif = size - pos;
+        file.seekp(0, std::ios::end);
+        std::string buf{dif, '\0' - 1};
+        file.write(buf.c_str(), dif);
+        file.write(content, size);
+    }
+    file.close();
+}
