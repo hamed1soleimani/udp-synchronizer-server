@@ -3,7 +3,7 @@
 //
 
 #include "Message.h"
-#include "utils.h"
+#include "../utilities/utils.h"
 
 Message::Message(std::string operation, std::string filename) : operation{operation}, filename{filename} { }
 

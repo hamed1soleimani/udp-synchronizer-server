@@ -1,7 +1,7 @@
-#include "utils.h"
-#include "UDPServer.h"
-#include "MessageConsumer.h"
-#include "ChunkConsumer.h"
+#include "utilities/utils.h"
+#include "network/UDPServer.h"
+#include "consumer/MessageConsumer.h"
+#include "consumer/ChunkConsumer.h"
 
 int main(int argc, char *argv[]) {
     unsigned short port;

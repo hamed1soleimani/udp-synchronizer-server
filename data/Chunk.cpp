@@ -3,9 +3,7 @@
 //
 
 #include "Chunk.h"
-#include "utils.h"
-
-#include <string>
+#include "../utilities/utils.h"
 
 Chunk::Chunk(std::string filename, unsigned long start, std::vector<char> content) :
         filename{filename}, start{start}, contents{std::move(content)} {

@@ -3,10 +3,9 @@
 //
 
 #include "UDPServer.h"
-#include "utils.h"
+#include "../utilities/utils.h"
 
 #include <thread>
-#include <iostream>
 
 UDPServer::UDPServer(boost::asio::io_service &io_service, unsigned short port,
                      std::shared_ptr<std::queue<Message>> message_queue,
@@ -43,13 +42,13 @@ void UDPServer::handle_receive(const boost::system::error_code &error,
                 message_queue_->push(m);
                 lck.unlock();
                 message_condition_->notify_all();
-            }else if(code.compare("CH") == 0){
+            } else if (code.compare("CH") == 0) {
                 Chunk c = Chunk::toChunk(bare_message);
                 std::unique_lock<std::mutex> lck{*chunk_mutex_};
                 chunk_queue_->push(c);
                 lck.unlock();
                 chunk_condition_->notify_all();
-            }else{
+            } else {
                 std::cout << "corrupted message!" << std::endl;
                 std::cout << " 321 hash is :" << hash << std::endl;
             }

@@ -9,7 +9,7 @@ link_directories(${Boost_LIBRARY_DIR})
 
 find_package(Threads)
 
-set(SOURCE_FILES main.cpp UDPServer.cpp UDPServer.h utils.cpp utils.h Message.h Message.cpp MessageConsumer.cpp MessageConsumer.h Chunk.cpp Chunk.h ChunkConsumer.cpp ChunkConsumer.h ChunkConsumer.cpp ChunkConsumer.h)
+set(SOURCE_FILES main.cpp network/UDPServer.cpp network/UDPServer.h utilities/utils.cpp utilities/utils.h data/Message.h data/Message.cpp consumer/MessageConsumer.cpp consumer/MessageConsumer.h data/Chunk.cpp data/Chunk.h consumer/ChunkConsumer.cpp consumer/ChunkConsumer.h consumer/ChunkConsumer.cpp consumer/ChunkConsumer.h)
 add_executable(ZaeimCo_Server ${SOURCE_FILES})
 
 target_link_libraries(ZaeimCo_Server ${Boost_LIBRARIES})

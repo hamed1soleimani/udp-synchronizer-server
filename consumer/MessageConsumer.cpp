@@ -3,7 +3,7 @@
 //
 
 #include "MessageConsumer.h"
-#include "utils.h"
+#include "../utilities/utils.h"
 
 MessageConsumer::MessageConsumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
                                  std::shared_ptr<std::condition_variable> condition) :

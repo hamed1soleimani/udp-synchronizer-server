@@ -8,7 +8,7 @@
 #include <iostream>
 
 ChunkConsumer::ChunkConsumer(std::shared_ptr<std::queue<Chunk>> queue, std::shared_ptr<std::mutex> mutex,
-                                 std::shared_ptr<std::condition_variable> condition) :
+                             std::shared_ptr<std::condition_variable> condition) :
         queue_{queue}, mutex_{mutex}, condition_{condition} {
     std::thread t1{&ChunkConsumer::start, this};
     t1.detach();

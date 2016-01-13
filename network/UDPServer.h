@@ -15,8 +15,8 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "Message.h"
-#include "Chunk.h"
+#include "../data/Message.h"
+#include "../data/Chunk.h"
 
 using boost::asio::ip::udp;
 

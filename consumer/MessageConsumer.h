@@ -13,7 +13,7 @@
 #include <tuple>
 #include <condition_variable>
 
-#include "Message.h"
+#include "../data/Message.h"
 
 class MessageConsumer {
 public:
