@@ -27,8 +27,9 @@ void UDPServer::handle_receive(const boost::system::error_code &error,
     if (!error || error == boost::asio::error::message_size) {
         std::string message(receive_buffer_.data(), receive_buffer_.data() + size);
         try {
+            Message m = Message::toMessage(message);
             std::unique_lock<std::mutex> lck{*mutex_};
-            queue_->push(Message::toMessage(message));
+            queue_->push(m);
             condition_->notify_all();
         }catch(std::invalid_argument e){
             std::cout << e.what() << std::endl;
