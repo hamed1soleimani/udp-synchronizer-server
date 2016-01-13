@@ -5,6 +5,7 @@
 #include "utils.h"
 
 #include <boost/filesystem.hpp>
+#include <fstream>
 
 using namespace boost::filesystem;
 
@@ -26,6 +27,35 @@ bool utils::create_dir(std::string dir) {
         std::cout << "successfully created directory: " << dir << std::endl;
     else
         std::cout << "failed to create directory: " << dir << std::endl;
+    return result;
+}
+
+bool utils::create_file(std::string file) {
+    path p{file};
+    bool result = false;
+    bool exist = false;
+    try {
+        exist = exists(p);
+        if(!exist && p.has_branch_path() && !exists(p.parent_path())){
+            create_directories(p.parent_path());
+        }
+    } catch (filesystem_error &e) {
+        std::cout << e.what() << std::endl;
+        result = false;
+    }
+    if(!exist){
+        std::ofstream f (file);
+        if(f.is_open()) {
+            result = true;
+            f.close();
+        }else{
+            result = false;
+        }
+    }
+    if (result)
+        std::cout << "successfully created file: " << file << std::endl;
+    else
+        std::cout << "failed to create file: " << file << std::endl;
     return result;
 }
 

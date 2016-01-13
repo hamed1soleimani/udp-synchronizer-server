@@ -31,5 +31,5 @@ void Consumer::consume(Message message) {
     else if (message.operation.compare("REMOVE_FILE") == 0)
         utils::remove_file(message.filename);
     else if (message.operation.compare("CREATE_FILE") == 0)
-        std::cerr << "dose not implemented yet!" << std::endl;
+        utils::create_file(message.filename);
 }

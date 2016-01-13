@@ -14,7 +14,9 @@ namespace utils {
 
     bool remove_file(std::string file);
 
-    bool create_dir(std::string fir);
+    bool create_dir(std::string dir);
+
+    bool create_file(std::string file);
 
     std::string hash_message(std::string message);
 }
