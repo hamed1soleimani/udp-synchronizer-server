@@ -30,6 +30,7 @@ void UDPServer::handle_receive(const boost::system::error_code &error,
             Message m = Message::toMessage(message);
             std::unique_lock<std::mutex> lck{*mutex_};
             queue_->push(m);
+            lck.unlock();
             condition_->notify_all();
         }catch(std::invalid_argument e){
             std::cout << e.what() << std::endl;
