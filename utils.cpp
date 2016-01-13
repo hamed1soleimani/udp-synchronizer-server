@@ -17,7 +17,7 @@ bool utils::create_dir(std::string dir) {
     path p{dir};
     bool result = false;
     try {
-        result = create_directory(p);
+        result = create_directories(p);
     } catch (filesystem_error &e) {
         std::cout << e.what() << std::endl;
         result = false;
