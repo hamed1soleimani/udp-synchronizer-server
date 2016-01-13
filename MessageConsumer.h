@@ -15,10 +15,10 @@
 
 #include "Message.h"
 
-class Consumer {
+class MessageConsumer {
 public:
-    Consumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
-             std::shared_ptr<std::condition_variable> condition);
+    MessageConsumer(std::shared_ptr<std::queue<Message>> queue, std::shared_ptr<std::mutex> mutex,
+                    std::shared_ptr<std::condition_variable> condition);
 
     void start();
 
