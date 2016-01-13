@@ -60,3 +60,7 @@ bool utils::remove_file(std::string file) {
         std::cout << "failed to remove file: " << file << std::endl;
     return result;
 }
+
+std::string utils::hash_message(std::string message) {
+    return std::to_string(std::hash<std::string>()(message));
+}

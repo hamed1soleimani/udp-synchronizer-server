@@ -15,6 +15,8 @@ namespace utils {
     bool remove_file(std::string file);
 
     bool create_dir(std::string fir);
+
+    std::string hash_message(std::string message);
 }
 
 #endif //ZAEIMCO_SERVER_UTILS_H

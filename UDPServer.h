@@ -29,7 +29,7 @@ public:
 private:
     udp::socket socket_;
     udp::endpoint remote_endpoint_;
-    boost::array<char, 1024> receive_buffer_;
+    boost::array<char, 1500> receive_buffer_;
     std::shared_ptr<std::queue<Message>> queue_;
     std::shared_ptr<std::mutex> mutex_;
     std::shared_ptr<std::condition_variable> condition_;
