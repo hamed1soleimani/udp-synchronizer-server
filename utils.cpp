@@ -36,19 +36,19 @@ bool utils::create_file(std::string file) {
     bool exist = false;
     try {
         exist = exists(p);
-        if(!exist && p.has_branch_path() && !exists(p.parent_path())){
+        if (!exist && p.has_branch_path() && !exists(p.parent_path())) {
             create_directories(p.parent_path());
         }
     } catch (filesystem_error &e) {
         std::cout << e.what() << std::endl;
         result = false;
     }
-    if(!exist){
-        std::ofstream f (file);
-        if(f.is_open()) {
+    if (!exist) {
+        std::ofstream f(file);
+        if (f.is_open()) {
             result = true;
             f.close();
-        }else{
+        } else {
             result = false;
         }
     }
@@ -93,12 +93,11 @@ bool utils::remove_file(std::string file) {
 
 std::string utils::hash_message(std::string message) {
     std::string h = std::to_string(std::hash<std::string>()(message));
-    if(h.size() > 20)
+    if (h.size() > 20)
         return h.substr(0, 20);
-    else
-    {
+    else {
         std::string t = "";
-        for(int i = 0; i < 20 - h.size(); i ++)
+        for (int i = 0; i < 20 - h.size(); i++)
             t += " ";
         h += t;
         return h;
