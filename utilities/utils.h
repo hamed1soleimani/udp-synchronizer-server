@@ -20,7 +20,7 @@ namespace utils {
 
     std::string hash_message(std::string message);
 
-    void write_chunk(std::string filename, unsigned long pos, int size, char * content);
+    void write_chunk(std::string filename, unsigned long pos, int size, std::string content);
 }
 
 #endif //ZAEIMCO_SERVER_UTILS_H

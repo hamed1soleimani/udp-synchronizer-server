@@ -35,6 +35,7 @@ void UDPServer::handle_receive(const boost::system::error_code &error,
         std::string hash = message.substr(0, 20);
         std::string bare_message = message.substr(24);
         std::string code = message.substr(21, 2);
+        //std::cout << bare_message << std::endl;
         if (hash.compare(utils::hash_message(bare_message)) == 0) {
             if (code.compare("OP") == 0) {
                 Message m = Message::toMessage(bare_message);
