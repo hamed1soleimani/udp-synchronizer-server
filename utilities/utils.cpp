@@ -105,18 +105,19 @@ std::string utils::hash_message(std::string message) {
 }
 
 void utils::write_chunk(std::string filename, unsigned long pos, int size, std::string content) {
-    std::streampos file_size;
-    std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::ate);
-    file_size = file.tellp();
-    if(file_size >= pos + size){
-        file.seekp(pos, std::ios::beg);
+    path p{filename};
+    size_t fis = file_size(p);
+    if(fis > pos + size){
+        std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::in);
+        file.seekp(pos);
         file.write(content.data(), size);
+        file.close();
     }else{
-        unsigned long dif = size - pos;
-        file.seekp(0, std::ios::end);
-        std::string buf{dif, '\0' - 1};
-        file.write(buf.c_str(), dif);
+        std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::app);
+        unsigned long dif = pos - fis;
+        std::string buf{dif, '\0'};
+        file.write(buf.data(), dif);
         file.write(content.data(), size);
+        file.close();
     }
-    file.close();
 }

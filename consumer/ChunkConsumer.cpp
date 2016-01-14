@@ -7,13 +7,12 @@
 
 #include <boost/filesystem.hpp>
 #include <thread>
-#include <iostream>
 
 using namespace boost::filesystem;
 
 ChunkConsumer::ChunkConsumer(std::shared_ptr<std::queue<Chunk>> queue, std::shared_ptr<std::mutex> mutex,
                              std::shared_ptr<std::condition_variable> condition) :
-        queue_{queue}, mutex_{mutex}, condition_{condition} {
+        queue_{queue}, mutex_{mutex}, condition_{condition},c{0}{
     std::thread t1{&ChunkConsumer::start, this};
     t1.detach();
 }
@@ -30,10 +29,11 @@ void ChunkConsumer::start() {
 }
 
 void ChunkConsumer::consume(Chunk chunk) {
+    c++;
     path p{chunk.filename};
     if(!exists(p)){
         utils::create_file(chunk.filename);
     }
-    utils::write_chunk(chunk.filename, chunk.start, sizeof(chunk.contents), chunk.contents.data());
-    std::cout << "created chunk at " << chunk.filename << " [" << chunk.start << "]" << std::endl;
+    utils::write_chunk(chunk.filename, chunk.start, chunk.contents.size(), chunk.contents);
+    std::cout << "created chunk at " << chunk.filename << " [" << c << "]" << std::endl;
 }

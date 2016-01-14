@@ -24,6 +24,7 @@ private:
     std::shared_ptr<std::queue<Chunk>> queue_;
     std::shared_ptr<std::mutex> mutex_;
     std::shared_ptr<std::condition_variable> condition_;
+    int c;
 };
 
 
