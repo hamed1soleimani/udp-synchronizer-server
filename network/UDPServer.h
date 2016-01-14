@@ -20,7 +20,7 @@
 
 using boost::asio::ip::udp;
 
-const int BUFFER_SIZE = 1024;
+const int BUFFER_SIZE = 1500;
 
 class UDPServer {
 public:
