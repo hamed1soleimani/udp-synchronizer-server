@@ -136,10 +136,18 @@ void utils::write_chunk(std::string filename, unsigned long pos, int size, std::
         file.seekp(pos);
         file.write(content.data(), size);
         file.close();
-    }else{
+    }else if(fis > pos){
+        std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::in);
+        file.seekp(pos);
+        file.write(content.data(), fis - pos);
+        file.close();
+        std::ofstream file1(filename, std::ios::out | std::ios::binary | std::ios::app);
+        file1.write(content.data() + (fis - pos), size - (fis - pos));
+        file1.close();
+    }else if(pos >= fis){
         std::ofstream file(filename, std::ios::out | std::ios::binary | std::ios::app);
         unsigned long dif = pos - fis;
-        std::string buf{dif, '\0'};
+        std::string buf{dif, '\0' - 1};
         file.write(buf.data(), dif);
         file.write(content.data(), size);
         file.close();
