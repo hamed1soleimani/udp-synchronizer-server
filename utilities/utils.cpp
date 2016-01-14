@@ -17,10 +17,17 @@ int utils::print_usage() {
 bool utils::create_dir(std::string dir) {
     path p{dir};
     bool result = false;
+    bool exist = true;
     try {
-        result = create_directories(p);
+        exist = exists(p);
+        if(!exist)
+            result = create_directories(p);
     } catch (filesystem_error &e) {
         std::cout << e.what() << std::endl;
+        result = false;
+    }
+    if(exist){
+        std::cout << "directory already exist: " << dir << std::endl;
         result = false;
     }
     if (result)
@@ -33,7 +40,7 @@ bool utils::create_dir(std::string dir) {
 bool utils::create_file(std::string file) {
     path p{file};
     bool result = false;
-    bool exist = false;
+    bool exist = true;
     try {
         exist = exists(p);
         if (!exist && p.has_branch_path() && !exists(p.parent_path())) {
@@ -51,6 +58,9 @@ bool utils::create_file(std::string file) {
         } else {
             result = false;
         }
+    }else{
+        result = false;
+        std::cout << "file already exist: " << file << std::endl;
     }
     if (result)
         std::cout << "successfully created file: " << file << std::endl;
@@ -62,10 +72,17 @@ bool utils::create_file(std::string file) {
 bool utils::remove_dir(std::string dir) {
     path p{dir};
     bool result = false;
+    bool exist = false;
     try {
-        result = remove_all(p) > 0;
+        exist = exists(p);
+        if(exist)
+            result = remove_all(p) > 0;
     } catch (filesystem_error &e) {
         std::cout << e.what() << std::endl;
+        result = false;
+    }
+    if(!exist){
+        std::cout << "directory does not exist: " << dir << std::endl;
         result = false;
     }
     if (result)
@@ -78,10 +95,17 @@ bool utils::remove_dir(std::string dir) {
 bool utils::remove_file(std::string file) {
     path p{file};
     bool result = false;
+    bool exist = false;
     try {
-        result = remove(p);
+        exist = exists(p);
+        if(exist)
+            result = remove(p);
     } catch (filesystem_error &e) {
         std::cout << e.what() << std::endl;
+        result = false;
+    }
+    if(!exist){
+        std::cout << "file does not exist: " << file << std::endl;
         result = false;
     }
     if (result)
