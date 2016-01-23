@@ -34,6 +34,6 @@ void ChunkConsumer::consume(Chunk chunk) {
         utils::create_file(chunk.filename);
     }
     utils::write_chunk(chunk.filename, chunk.start, chunk.contents.size(), chunk.contents);
-    if(chunk.contents.size())
+    if(chunk.contents.size() < 1024)
         std::cout << "receiving last chunks" << std::endl;
 }
