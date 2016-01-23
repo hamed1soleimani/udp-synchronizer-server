@@ -11,10 +11,11 @@ class Message {
 public:
     Message(std::string operation, std::string filename);
 
+    static Message toMessage(std::string message);
+
     std::string operation;
     std::string filename;
 
-    static Message toMessage(std::string message);
 };
 
 #endif //ZAEIMCO_SERVER_MESSAGE_H

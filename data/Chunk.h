@@ -13,11 +13,12 @@ class Chunk {
 public:
     Chunk(std::string filename, unsigned long start, std::string contents);
 
+    static Chunk toChunk(std::string message);
+
     std::string filename;
     unsigned long start;
     std::string contents;
 
-    static Chunk toChunk(std::string message);
 };
 
 

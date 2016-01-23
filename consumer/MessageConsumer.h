@@ -22,12 +22,12 @@ public:
 
     void start();
 
-    void consume(Message message);
-
 private:
     std::shared_ptr<std::queue<Message>> queue_;
     std::shared_ptr<std::mutex> mutex_;
     std::shared_ptr<std::condition_variable> condition_;
+
+    void consume(Message message);
 };
 
 #endif //ZAEIMCO_SERVER_CONSUMER_H
